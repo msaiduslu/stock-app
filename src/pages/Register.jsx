@@ -4,7 +4,6 @@ import Avatar from "@mui/material/Avatar";
 import LockIcon from "@mui/icons-material/Lock";
 import image from "../assets/result.svg";
 import Grid from "@mui/material/Grid";
-
 import { Link, useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
