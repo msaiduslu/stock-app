@@ -13,10 +13,12 @@ import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { blueGrey } from "@mui/material/colors";
+import useAuthCall from "../hooks/useAuthCall";
 
 const drawerWidth = 200;
 
 function Dashboard(props) {
+  const { logout } = useAuthCall();
   const { currentUser } = useSelector((state) => state.auth);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -59,8 +61,11 @@ function Dashboard(props) {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             Stock APP
           </Typography>
-          {currentUser && <Button color="inherit">Logout</Button>}
-          {/* Logout butonuna onclick yapilacak */}
+          {currentUser && (
+            <Button color="inherit" onClick={() => logout()}>
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Box
