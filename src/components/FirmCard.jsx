@@ -31,9 +31,10 @@ export default function FirmCard({ firm }) {
         </Typography>
       </CardContent>
       <CardMedia
-        sx={{ p: 1, height: 140 }}
-        image={firm.image}
-        title="green iguana"
+        image={firm?.image}
+        sx={{ p: 1, objectFit: "contain", height: "130px" }}
+        component="img"
+        alt="firm-img"
       />
       <Typography variant="body2" color="text.secondary">
         Phone:{firm?.phone}
