@@ -4,12 +4,12 @@ const stockSlice = createSlice({
   name: "stock",
 
   initialState: {
-    purchases: null,
-    sales: null,
-    firms: null,
-    brands: null,
-    categories: null,
-    products: null,
+    purchases: [],
+    sales: [],
+    firms: [],
+    brands: [],
+    categories: [],
+    products: [],
     loading: false,
     error: false,
   },
