@@ -1,21 +1,17 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ProductModal from "../components/modals/ProductModal";
 import useStockCall from "../hooks/useStockCall";
-import { flex } from "../styles/globalStyle";
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import { DataGrid, GridActionsCellItem, GridToolbar } from "@mui/x-data-grid";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { btnStyle } from "../styles/globalStyle";
 
 const Products = () => {
   const { products } = useSelector((state) => state.stock);
-  const { getStockData } = useStockCall();
+  const { getStockData, deleteStockData } = useStockCall();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -28,6 +24,68 @@ const Products = () => {
     address: "",
     image: "",
   });
+
+  const columns = [
+    {
+      field: "id",
+      headerName: "#",
+      minWidth: 40,
+      maxWidth: 70,
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "category",
+      headerName: "Category",
+      headerAlign: "center",
+      align: "center",
+      minWidth: 150,
+      flex: 2,
+    },
+    {
+      field: "brand",
+      headerName: "Brand",
+      minWidth: 150,
+      flex: 2,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "name",
+      headerName: "Name",
+      minWidth: 150,
+      flex: 2,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "stock",
+      headerName: "Stock",
+      minWidth: 100,
+      flex: 0.7,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      type: "number",
+      minWidth: 50,
+      flex: 0.7,
+      headerAlign: "center",
+      align: "center",
+      renderCell: ({ id }) => (
+        <GridActionsCellItem
+          sx={btnStyle}
+          icon={<DeleteForeverIcon />}
+          label="Delete"
+          onClick={() => deleteStockData("products", id)}
+        />
+      ),
+    },
+  ];
+
   useEffect(() => {
     getStockData("products");
   }, []);
@@ -47,37 +105,23 @@ const Products = () => {
         setInfo={setInfo}
       />
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">#</TableCell>
-              <TableCell align="center">Category</TableCell>
-              <TableCell align="center">Brand</TableCell>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Stock</TableCell>
-              <TableCell align="center">Operation</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products?.map((product, index) => (
-              <TableRow
-                key={product.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center" component="th" scope="row">
-                  {index + 1}
-                </TableCell>
-                <TableCell align="center">{product.category}</TableCell>
-                <TableCell align="center">{product.brand}</TableCell>
-                <TableCell align="center">{product.name}</TableCell>
-                <TableCell align="center">{product.stock}</TableCell>
-                <TableCell align="center"></TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Box sx={{ width: "100%", marginTop: "1rem" }}>
+        <DataGrid
+          autoHeight
+          rows={products}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          pageSizeOptions={[5]}
+          disableRowSelectionOnClick
+          slots={{ toolbar: GridToolbar }}
+        />
+      </Box>
     </div>
   );
 };
