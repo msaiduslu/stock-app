@@ -71,7 +71,6 @@ const Login = () => {
             validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               login(values);
-              //navigate;
               actions.resetForm();
               actions.setSubmitting(false);
             }}

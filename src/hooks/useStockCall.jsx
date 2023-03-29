@@ -27,7 +27,29 @@ const useStockCall = () => {
       dispatch(fetchFail());
     }
   };
-  return { getStockData, deleteStockData };
+
+  const postStockData = async (url, info) => {
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.post(`stock/${url}/`, info);
+      toastSuccessNotify(`${url} Successfuly Added.`);
+      getStockData(url);
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+
+  const putStockData = async (url, info) => {
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.put(`stock/${url}/${info.id}/`, info);
+      toastSuccessNotify(`${url} Successfuly Updated.`);
+      getStockData(url);
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+  return { getStockData, deleteStockData, postStockData, putStockData };
 };
 
 export default useStockCall;

@@ -15,9 +15,9 @@ const Brands = () => {
   return (
     <div>
       <Typography variant="h4" color="error" mb={3}>
-        Firms
+        Brands
       </Typography>
-      <Button variant="contained">New Firm</Button>
+      <Button variant="contained">New Brand</Button>
       <Grid container sx={flex}>
         {brands?.map((brand) => (
           <Grid key={brand.id} item>
