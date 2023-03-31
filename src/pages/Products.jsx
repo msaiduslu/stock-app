@@ -11,18 +11,17 @@ import { btnStyle } from "../styles/globalStyle";
 
 const Products = () => {
   const { products } = useSelector((state) => state.stock);
-  const { getStockData, deleteStockData } = useStockCall();
+  const { deleteStockData, getProductCategoryBrand } = useStockCall();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setInfo({ name: "", phone: "", address: "", image: "" });
+    setInfo({ category_id: "", brand_id: "", name: "" });
   };
   const [info, setInfo] = useState({
+    category_id: "",
+    brand_id: "",
     name: "",
-    phone: "",
-    address: "",
-    image: "",
   });
 
   const columns = [
@@ -87,7 +86,10 @@ const Products = () => {
   ];
 
   useEffect(() => {
-    getStockData("products");
+    // getStockData("products");
+    // getStockData("categories");
+    // getStockData("brands");
+    getProductCategoryBrand();
   }, []);
 
   return (
