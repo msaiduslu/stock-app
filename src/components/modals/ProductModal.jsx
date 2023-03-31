@@ -1,12 +1,18 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import Modal from "@mui/material/Modal";
 import { modalStyle } from "../../styles/globalStyle";
 import { Button, TextField } from "@mui/material";
 import useStockCall from "../../hooks/useStockCall";
+import { useSelector } from "react-redux";
 
 export default function ProductModal({ open, handleClose, info, setInfo }) {
-  const { postStockData, putStockData } = useStockCall();
+  const { postStockData } = useStockCall();
+  const { categories, brands } = useSelector((state) => state.stock);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInfo({ ...info, [name]: value });
@@ -14,9 +20,9 @@ export default function ProductModal({ open, handleClose, info, setInfo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    info.id ? putStockData("firms", info) : postStockData("firms", info);
+    postStockData("products", info);
     handleClose();
-    setInfo({ name: "", phone: "", address: "", image: "" });
+    setInfo({ category_id: "", brand_id: "", name: "" });
   };
   return (
     <div>
@@ -32,8 +38,44 @@ export default function ProductModal({ open, handleClose, info, setInfo }) {
             component="form"
             onSubmit={handleSubmit}
           >
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Categories</InputLabel>
+              <Select
+                labelId="category"
+                id="category"
+                name="category_id"
+                value={info?.category_id}
+                label="Category"
+                onChange={handleChange}
+                required
+              >
+                {categories?.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Brands</InputLabel>
+              <Select
+                labelId="brand"
+                id="brand"
+                name="brand_id"
+                value={info?.brand_id}
+                label="Brand"
+                onChange={handleChange}
+                required
+              >
+                {brands?.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <TextField
-              label="Firm Name"
+              label="Product Name"
               name="name"
               id="name"
               type="text"
@@ -42,38 +84,8 @@ export default function ProductModal({ open, handleClose, info, setInfo }) {
               value={info?.name || ""}
               onChange={handleChange}
             />
-            <TextField
-              label="Phone"
-              name="phone"
-              id="phone"
-              type="tel"
-              variant="outlined"
-              required
-              value={info?.phone || ""}
-              onChange={handleChange}
-            />
-            <TextField
-              label="Address"
-              name="address"
-              id="address"
-              type="text"
-              variant="outlined"
-              required
-              value={info?.address || ""}
-              onChange={handleChange}
-            />
-            <TextField
-              label="Image"
-              name="image"
-              id="image"
-              type="url"
-              variant="outlined"
-              required
-              value={info?.image || ""}
-              onChange={handleChange}
-            />
             <Button type="submit" variant="contained">
-              Submit
+              Add New Product
             </Button>
           </Box>
         </Box>
