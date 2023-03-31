@@ -17,7 +17,9 @@ const Brands = () => {
       <Typography variant="h4" color="error" mb={3}>
         Brands
       </Typography>
-      <Button variant="contained">New Brand</Button>
+      <Button variant="contained" sx={{ marginBottom: "1rem" }}>
+        New Brand
+      </Button>
       <Grid container sx={flex}>
         {brands?.map((brand) => (
           <Grid key={brand.id} item>

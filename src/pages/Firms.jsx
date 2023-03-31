@@ -30,7 +30,11 @@ const Firms = () => {
       <Typography variant="h4" color="error" mb={3}>
         Firms
       </Typography>
-      <Button onClick={handleOpen} variant="contained">
+      <Button
+        onClick={handleOpen}
+        variant="contained"
+        sx={{ marginBottom: "1rem" }}
+      >
         New Firm
       </Button>
       <FirmModal
