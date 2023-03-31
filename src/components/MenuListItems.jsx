@@ -3,7 +3,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useNavigate } from "react-router-dom";
 import { icons } from "../helper/DashboardIcons";
 
 const iconStyle = {
@@ -13,20 +12,22 @@ const iconStyle = {
   "&:hover .MuiSvgIcon-root": { color: "red" },
 };
 const MenuListItems = () => {
-  const navigate = useNavigate();
   return (
     <div>
       <List>
         {icons?.map((item, index) => (
           <ListItem key={index} disablePadding>
-            {item.url.includes("http") && (
+            {!item.url.includes("http") && (
               <ListItemButton to={item.url} sx={iconStyle}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.title} />
               </ListItemButton>
             )}
-            {!item.url.includes("http") && (
-              <ListItemButton onClick={() => navigate(item.url)} sx={iconStyle}>
+            {item.url.includes("http") && (
+              <ListItemButton
+                onClick={() => window.open(item.url, "_blank")}
+                sx={iconStyle}
+              >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.title} />
               </ListItemButton>
