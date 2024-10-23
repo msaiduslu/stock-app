@@ -13,7 +13,7 @@ import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 const useAuthCall = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const BASE_URL = "https://12182.fullstack.clarusway.com/";
+  const BASE_URL = "https://stockappapi.fly.dev/";
   const login = async (userInfo) => {
     dispatch(fetchStart());
     try {

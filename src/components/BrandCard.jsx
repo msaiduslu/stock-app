@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { btnStyle, flex } from "../styles/globalStyle";
 import useStockCall from "../hooks/useStockCall";
 
-export default function BrandCard({ brand }) {
+export default function BrandCard({ brand, setOpen, setInfo }) {
   const { deleteStockData } = useStockCall();
   return (
     <Card
@@ -34,7 +34,13 @@ export default function BrandCard({ brand }) {
         alt="brand-img"
       />
       <CardActions sx={flex}>
-        <EditIcon sx={btnStyle} />
+        <EditIcon
+          sx={btnStyle}
+          onClick={() => {
+            setOpen(true);
+            setInfo(brand);
+          }}
+        />
         <DeleteOutlineIcon
           sx={btnStyle}
           onClick={() => deleteStockData("brands", brand.id)}

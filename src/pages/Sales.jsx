@@ -29,13 +29,17 @@ const Sales = () => {
 
   const columns = [
     {
-      field: "createds",
+      field: "created",
       headerName: "Date",
       minWidth: 150,
       headerAlign: "center",
       align: "center",
+      valueFormatter: (params) => {
+        if (!params.value) return "";
+        const date = new Date(params.value);
+        return date.toLocaleDateString("tr-TR");
+      },
     },
-
     {
       field: "brand",
       headerName: "Brand",

@@ -34,11 +34,16 @@ const Purchases = () => {
 
   const columns = [
     {
-      field: "createds",
+      field: "created",
       headerName: "Date",
       minWidth: 150,
       headerAlign: "center",
       align: "center",
+      valueFormatter: (params) => {
+        if (!params.value) return "";
+        const date = new Date(params.value);
+        return date.toLocaleDateString("tr-TR");
+      },
     },
     {
       field: "firm",
@@ -103,7 +108,14 @@ const Purchases = () => {
             label="Edit"
             onClick={() => {
               setOpen(true);
-              setInfo({ id, firm_id, brand_id, product_id, quantity, price });
+              setInfo({
+                id,
+                firm_id,
+                brand_id,
+                product_id,
+                quantity,
+                price,
+              });
             }}
             sx={btnStyle}
           />,
