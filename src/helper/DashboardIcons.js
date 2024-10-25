@@ -10,32 +10,32 @@ export const icons = [
   {
     icon: <DashboardIcon />,
     title: "Dashboard",
-    url: "/stock/",
+    url: "#/stock/",
   },
   {
     title: "Purchase",
     icon: <ShoppingCartIcon />,
-    url: "/stock/purchases/",
+    url: "#/stock/purchases/",
   },
   {
     title: "Sales",
     icon: <AttachMoneyIcon />,
-    url: "/stock/sales/",
+    url: "#/stock/sales/",
   },
   {
     title: "Firms",
     icon: <StoreIcon />,
-    url: "/stock/firms/",
+    url: "#/stock/firms/",
   },
   {
     title: "Brands",
     icon: <StarsIcon />,
-    url: "/stock/brands/",
+    url: "#/stock/brands/",
   },
   {
     title: "Products",
     icon: <InventoryIcon />,
-    url: "/stock/products/",
+    url: "#/stock/products/",
   },
   {
     title: "Admin Panel",
