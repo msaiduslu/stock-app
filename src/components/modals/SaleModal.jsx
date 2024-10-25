@@ -61,7 +61,7 @@ export default function SaleModal({ open, handleClose, info, setInfo }) {
                 onChange={handleChange}
                 required
               >
-                <MenuItem onClick={() => navigate("/stock/brands/")}>
+                <MenuItem onClick={() => navigate("#/stock/brands/")}>
                   Add New Brand
                 </MenuItem>
                 <hr />
@@ -87,7 +87,7 @@ export default function SaleModal({ open, handleClose, info, setInfo }) {
                 onChange={handleChange}
                 required
               >
-                <MenuItem onClick={() => navigate("/stock/products")}>
+                <MenuItem onClick={() => navigate("#/stock/products")}>
                   Add New Product
                 </MenuItem>
                 <hr />
