@@ -57,7 +57,7 @@ export default function PurchaseModal({ open, handleClose, info, setInfo }) {
                 onChange={handleChange}
                 required
               >
-                <MenuItem onClick={() => navigate("#/stock/firms")}>
+                <MenuItem onClick={() => navigate("/stock/firms")}>
                   Add New Firm
                 </MenuItem>
                 <hr />
@@ -83,7 +83,7 @@ export default function PurchaseModal({ open, handleClose, info, setInfo }) {
                 onChange={handleChange}
                 required
               >
-                <MenuItem onClick={() => navigate("#/stock/brands")}>
+                <MenuItem onClick={() => navigate("/stock/brands")}>
                   Add New Brand
                 </MenuItem>
                 <hr />
@@ -109,7 +109,7 @@ export default function PurchaseModal({ open, handleClose, info, setInfo }) {
                 onChange={handleChange}
                 required
               >
-                <MenuItem onClick={() => navigate("#/stock/products")}>
+                <MenuItem onClick={() => navigate("/stock/products")}>
                   Add New Product
                 </MenuItem>
                 <hr />
